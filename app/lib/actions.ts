@@ -9,14 +9,12 @@ const InvoiceSchema = z.object({
   id: z.string(),
   customerId: z.string({
     required_error: "Please select a customer.",
-    // invalid_type_error: "Please select a customer.",
   }),
   amount: z.coerce
     .number()
     .gt(0, { message: "Please enter an amount greater than $0." }),
   status: z.enum(["pending", "paid"], {
     required_error: "Please select an invoice status.",
-    // invalid_type_error: "Please select an invoice status.",
   }),
   date: z.string(),
 });
@@ -31,7 +29,7 @@ export type State = {
     amount?: string[];
     status?: string[];
   };
-  message?: string[] | null;
+  message?: string | null;
 };
 
 export async function createInvoice(prevState: State, formData: FormData) {
